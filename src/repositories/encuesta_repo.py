@@ -53,13 +53,11 @@ class EncuestaRepository:
                     tipo=data["tipo"]
                 )
 
-                # Setear datos ANTES de agregar votos
                 encuesta.id = uuid.UUID(data["id"])
                 encuesta.estado = data["estado"]
                 encuesta.timestamp_inicio = datetime.fromisoformat(data["timestamp_inicio"])
                 encuesta.timestamp_fin = float(data["timestamp_fin"])
 
-                # Ahora que la encuesta está correctamente configurada, puedes agregar votos
                 for v in data.get("votos", []):
                     voto = Voto(
                         usuario_id=uuid.UUID(v["usuario_id"]),
@@ -69,7 +67,7 @@ class EncuestaRepository:
                     try:
                         encuesta.agregar_voto(voto)
                     except ValueError:
-                        pass  # Podrías registrar esto si quieres saber qué falló
+                        pass 
 
                 return encuesta
 

@@ -4,7 +4,7 @@ from models.encuesta import Encuesta
 from models.voto import Voto
 from repositories.encuesta_repo import EncuestaRepository
 from datetime import datetime
-from nft_service import NFTService 
+from .nft_service import NFTService 
 class PollService:
     def __init__(self, encuesta_repo: EncuestaRepository):
         self.encuesta_repo = encuesta_repo
@@ -26,7 +26,6 @@ class PollService:
             voto = Voto(usuario_id=usuario_id, opcion=opcion, encuesta_id=encuesta_id)
             try:
                 encuesta.agregar_voto(voto)
-                NFTService.crear_token(owner=str(usuario_id), poll_id=encuesta_id, opcion=opcion)
             except ValueError as e:
                 raise ValueError(f"Error al agregar voto: {e}")
             self.encuesta_repo.guardar_encuesta(encuesta)

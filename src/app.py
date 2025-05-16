@@ -53,7 +53,6 @@ def main():
 
     else:
         # Ejecutar CLI en consola
-        print("Bienvenido a La Última y Nos Vamos (modo CLI)")
         cli.run()
 
 if __name__ == "__main__":

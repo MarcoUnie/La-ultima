@@ -41,7 +41,8 @@ class CLIController:
                     with open(os.path.join(DATA_DIR, "usuarios.json"), "r") as f:
                         usuarios = json.load(f)
                     for data in usuarios:
-                        usuario_id = uuid.UUID(data["id"])
+                        if data["username"] == username:
+                            usuario_id = uuid.UUID(data["id"])
                     if self.user_service.autenticar_usuario(username, password):
                         self.current_user = username
                         print(f"Usuario '{username}' logueado.")
@@ -73,6 +74,7 @@ class CLIController:
                     opcion = input("Opción: ").strip()
                     try:
                         self.poll_service.votar(poll_id, usuario_id, opcion)
+                        self.nft_service.crear_token(username, poll_id, opcion)
                         print("Voto registrado.")
                     except Exception as e:
                         print(f"Error: {e}")
@@ -101,9 +103,9 @@ class CLIController:
 
                 elif cmd == "mis_tokens":
                     if not self._check_login(): continue
-                    tokens = self.nft_service.listar_tokens_por_usuario(self.current_user)
+                    tokens = self.nft_service.listar_tokens_por_usuario(username)
                     for t in tokens:
-                        print(f"Token ID: {t.token_id} | Opción: {t.opcion} | Fecha: {t.issued_at} | Propietario: {t.owner}")
+                        print(f"Token ID: {t.id} | Opción: {t.opcion} | Fecha: {t.issued_at} | Propietario: {t.owner} | Encuesta ID: {t.poll_id}")
 
                 elif cmd == "transferir_token":
                     if not self._check_login(): continue
@@ -111,7 +113,7 @@ class CLIController:
                     nuevo_owner = input("Nuevo propietario: ").strip()
                     try:
                         token_id = uuid.UUID(token_id_str)
-                        self.nft_service.transferir_token(token_id, nuevo_owner)
+                        self.nft_service.transferir_token(token_id,usuario_id, nuevo_owner)
                         print("Token transferido correctamente.")
                     except ValueError as ve:
                         print(f"Error: {ve}")

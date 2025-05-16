@@ -1,0 +1,23 @@
+[
+    {
+        "id": "beb38536-94ac-47cf-aaa7-3395af500e12",
+        "pregunta": "adssd",
+        "opciones": {
+            "2": 1,
+            "3": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-16T10:04:50.584128",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1747382710.584128,
+        "votos": [
+            {
+                "usuario_id": "26a32c46-cc7b-414f-885b-d2aacb9555c3",
+                "opcion": "2",
+                "encuesta_id": "beb38536-94ac-47cf-aaa7-3395af500e12",
+                "timestamp": "2025-05-16T10:04:57.176285"
+            }
+        ]
+    }
+]

@@ -26,7 +26,6 @@ class PollService:
             voto = Voto(usuario_id=usuario_id, opcion=opcion, encuesta_id=encuesta_id)
             try:
                 encuesta.agregar_voto(voto)
-                print(f"Voto agregado: {voto}")
             except ValueError as e:
                 raise ValueError(f"Error al agregar voto: {e}")
             self.encuesta_repo.guardar_encuesta(encuesta)

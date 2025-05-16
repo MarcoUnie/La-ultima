@@ -1,0 +1,82 @@
+import json
+import os
+import uuid
+from typing import List, Optional
+from datetime import datetime
+from models.encuesta import Encuesta
+from models.voto import Voto
+
+DATA_DIR = "data"
+POLL_FILE = os.path.join(DATA_DIR, "encuestas.json")
+
+class EncuestaRepository:
+    def __init__(self):
+        os.makedirs(DATA_DIR, exist_ok=True)
+        if not os.path.exists(POLL_FILE):
+            with open(POLL_FILE, "w") as f:
+                json.dump([], f)
+
+    def guardar_encuesta(self, encuesta: Encuesta) -> None:
+        with open(POLL_FILE, "r") as f:
+            encuestas = json.load(f)
+
+        encuestas_actualizadas = []
+        encuesta_actualizada = False
+
+        for e in encuestas:
+            if isinstance(e.get("id"), str) and e["id"] == str(encuesta.id):
+                encuestas_actualizadas.append(encuesta.to_dict())
+                encuesta_actualizada = True
+            else:
+                encuestas_actualizadas.append(e)
+
+        if not encuesta_actualizada:
+            encuestas_actualizadas.append(encuesta.to_dict())
+
+        with open(POLL_FILE, "w") as f:
+            json.dump(encuestas_actualizadas, f, default=str, indent=4)
+
+
+
+
+
+    def obtener_encuesta(self, encuesta_id: uuid.UUID) -> Optional[Encuesta]:
+        with open(POLL_FILE, "r") as f:
+            encuestas = json.load(f)
+
+        for data in encuestas:
+            if data.get("id") == str(encuesta_id):
+                encuesta = Encuesta(
+                    pregunta=data["pregunta"],
+                    opciones=list(data["opciones"].keys()),
+                    duracion_segundos=data["duracion_segundos"],
+                    tipo=data["tipo"]
+                )
+
+                # Setear datos ANTES de agregar votos
+                encuesta.id = uuid.UUID(data["id"])
+                encuesta.estado = data["estado"]
+                encuesta.timestamp_inicio = datetime.fromisoformat(data["timestamp_inicio"])
+                encuesta.timestamp_fin = float(data["timestamp_fin"])
+
+                # Ahora que la encuesta está correctamente configurada, puedes agregar votos
+                for v in data.get("votos", []):
+                    voto = Voto(
+                        usuario_id=uuid.UUID(v["usuario_id"]),
+                        opcion=v["opcion"],
+                        encuesta_id=uuid.UUID(v["encuesta_id"])
+                    )
+                    try:
+                        encuesta.agregar_voto(voto)
+                    except ValueError:
+                        pass  # Podrías registrar esto si quieres saber qué falló
+
+                return encuesta
+
+        return None
+
+
+    def listar_encuestas(self) -> List[Encuesta]:
+        with open(POLL_FILE, "r") as f:
+            encuestas = json.load(f)
+        return [self.obtener_encuesta(uuid.UUID(e["id"])) for e in encuestas]

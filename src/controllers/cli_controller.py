@@ -16,7 +16,7 @@ class CLIController:
         self.chatbot_service = chatbot_service
 
     def run(self):
-        print("Bienvenido a La Última y Nos Vamos CLI")
+        print("Bienvenido al stream")
         while True:
             try:
                 command = input(">> ").strip()

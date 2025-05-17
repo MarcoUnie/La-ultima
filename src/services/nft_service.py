@@ -4,6 +4,11 @@ import os
 from repositories.nft_repo import NFTRepository
 from models.token_nft import TokenNFT
 from datetime import datetime
+from pymongo import MongoClient
+from config import MONGO_URI, MONGO_DB_NAME
+client = MongoClient(MONGO_URI)
+db = client[MONGO_DB_NAME]
+
 class NFTService:
     def __init__(self, nft_repo: NFTRepository):
         self.nft_repo = nft_repo
@@ -30,6 +35,11 @@ class NFTService:
                         token["owner"] = nuevo_owner
             with open(os.path.join("data", "nfts.json"), "w") as f:
                 json.dump(tokens, f, default=str, indent=4)
+            db.mongo_db.tokens.update_one(
+            {"id": token_id},
+            {"$set": {"owner": nuevo_owner}}
+        )
+
             return True
         else:
             raise ValueError(f"El token con ID {token_id} ya pertenece al usuario {nuevo_owner}.")

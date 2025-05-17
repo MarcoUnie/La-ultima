@@ -2,7 +2,9 @@ import json
 import os
 import uuid
 from typing import Optional, List
-from models.token_nft import TokenNFT  
+from models.token_nft import TokenNFT
+from neo4j import GraphDatabase
+from config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD  
 DATA_DIR = "data"
 NFT_FILE = os.path.join(DATA_DIR, "nfts.json")
 
@@ -19,6 +21,12 @@ class NFTRepository:
         tokens.append(token.to_dict())
         with open(NFT_FILE, "w") as f:
             json.dump(tokens, f, default=str, indent=4)
+        with GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD)).session() as session:
+            session.run(
+                "MERGE (e:NFT {id: $id}) SET e += {owner: $owner, poll_id: $poll_id, opcion: $opcion, issued_at: $issued_at}",
+                token.to_dict()
+            )
+
 
     def listar_tokens_por_usuario(self, owner: str) -> List[TokenNFT]:
         with open(NFT_FILE, "r") as f:

@@ -5,5 +5,19 @@
         "poll_id": "8cf1d550-78a2-40a7-808a-dd9f6c6481b9",
         "opcion": "2",
         "issued_at": "2025-05-16 21:42:11.528229"
+    },
+    {
+        "id": "afb94222-7860-4ab5-bd57-8bc1b5ba4c1f",
+        "owner": "p",
+        "poll_id": "cbcf8cb6-dc94-4d0a-932e-630b2a98065a",
+        "opcion": "2",
+        "issued_at": "2025-05-17 19:39:08.648926"
+    },
+    {
+        "id": "b1393ac0-938a-4727-b6f5-f559f8e62c73",
+        "owner": "p",
+        "poll_id": "bdeda875-ba68-452e-89ba-17c5884e725c",
+        "opcion": "2",
+        "issued_at": "2025-05-17 19:40:51.074415"
     }
 ]

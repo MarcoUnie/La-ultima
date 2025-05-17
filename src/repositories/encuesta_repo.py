@@ -5,6 +5,8 @@ from typing import List, Optional
 from datetime import datetime
 from models.encuesta import Encuesta
 from models.voto import Voto
+from neo4j import GraphDatabase
+from config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD
 
 DATA_DIR = "data"
 POLL_FILE = os.path.join(DATA_DIR, "encuestas.json")
@@ -35,6 +37,11 @@ class EncuestaRepository:
 
         with open(POLL_FILE, "w") as f:
             json.dump(encuestas_actualizadas, f, default=str, indent=4)
+        with GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD)).session() as session:
+            session.run(
+                "MERGE (e:Encuesta {id: $id}) SET e += {pregunta: $pregunta, tipo: $tipo, estado: $estado, timestamp_inicio: $timestamp_inicio, duracion_segundos: $duracion_segundos, timestamp_fin: $timestamp_fin}",
+                encuesta.to_dict()
+            )
 
 
 

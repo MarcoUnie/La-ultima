@@ -19,5 +19,61 @@
                 "timestamp": "2025-05-16T21:42:11.526509"
             }
         ]
+    },
+    {
+        "id": "cbcf8cb6-dc94-4d0a-932e-630b2a98065a",
+        "pregunta": "saddsa",
+        "opciones": {
+            "2": 1,
+            "5": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-17T19:38:57.512829",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1747503557.512829,
+        "votos": [
+            {
+                "usuario_id": "e58bc166-370d-438e-91ec-d52ddc5b1f7d",
+                "opcion": "2",
+                "encuesta_id": "cbcf8cb6-dc94-4d0a-932e-630b2a98065a",
+                "timestamp": "2025-05-17T19:39:08.280939"
+            }
+        ]
+    },
+    {
+        "id": "cc199ebb-2c25-4631-8753-659a0d866260",
+        "pregunta": "sadd",
+        "opciones": {
+            "2": 0,
+            "5": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-17T19:39:39.832983",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1747503599.832983,
+        "votos": []
+    },
+    {
+        "id": "bdeda875-ba68-452e-89ba-17c5884e725c",
+        "pregunta": "sdadsa",
+        "opciones": {
+            "2": 1,
+            "3": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-17T19:40:42.936429",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1747503662.936429,
+        "votos": [
+            {
+                "usuario_id": "e58bc166-370d-438e-91ec-d52ddc5b1f7d",
+                "opcion": "2",
+                "encuesta_id": "bdeda875-ba68-452e-89ba-17c5884e725c",
+                "timestamp": "2025-05-17T19:40:50.712974"
+            }
+        ]
     }
 ]

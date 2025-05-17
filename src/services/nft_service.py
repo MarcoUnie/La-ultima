@@ -4,6 +4,9 @@ import os
 from repositories.nft_repo import NFTRepository
 from models.token_nft import TokenNFT
 from datetime import datetime
+from neo4j import GraphDatabase
+from config import NEO4J_URI, NEO4J_USER, NEO4J_PASSWORD 
+
 class NFTService:
     def __init__(self, nft_repo: NFTRepository):
         self.nft_repo = nft_repo
@@ -30,6 +33,11 @@ class NFTService:
                         token["owner"] = nuevo_owner
             with open(os.path.join("data", "nfts.json"), "w") as f:
                 json.dump(tokens, f, default=str, indent=4)
+            with GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD)).session() as session:
+                session.run(
+                    "MATCH (t:TokenNFT {id: $id}) SET t.owner = $owner",
+                    {"id": token_id, "owner": nuevo_owner}
+                )
             return True
         else:
             raise ValueError(f"El token con ID {token_id} ya pertenece al usuario {nuevo_owner}.")

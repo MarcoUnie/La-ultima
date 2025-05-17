@@ -4,6 +4,8 @@ import os
 from repositories.nft_repo import NFTRepository
 from models.token_nft import TokenNFT
 from datetime import datetime
+from firebase_admin import firestore
+
 class NFTService:
     def __init__(self, nft_repo: NFTRepository):
         self.nft_repo = nft_repo
@@ -30,6 +32,7 @@ class NFTService:
                         token["owner"] = nuevo_owner
             with open(os.path.join("data", "nfts.json"), "w") as f:
                 json.dump(tokens, f, default=str, indent=4)
+            firestore.client().collection("NFTS").document(str(token.id)).set(token.to_dict())
             return True
         else:
             raise ValueError(f"El token con ID {token_id} ya pertenece al usuario {nuevo_owner}.")

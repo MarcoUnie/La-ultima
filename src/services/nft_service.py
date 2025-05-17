@@ -36,7 +36,6 @@ class NFTService:
             with open(os.path.join("data", "nfts.json"), "w") as f:
                 json.dump(tokens, f, default=str, indent=4)
             db.mongo_db.tokens.update_one(
-            {"id": token_id},
             {"$set": {"owner": nuevo_owner}}
         )
 

@@ -5,9 +5,18 @@ from typing import List, Optional
 from datetime import datetime
 from models.encuesta import Encuesta
 from models.voto import Voto
+from pymongo import MongoClient
+from config import MONGO_URI, MONGO_DB_NAME
 
 DATA_DIR = "data"
 POLL_FILE = os.path.join(DATA_DIR, "encuestas.json")
+USER_FILE = os.path.join(DATA_DIR, "usuarios.json")
+NFT_FILE = os.path.join(DATA_DIR, "nfts.json")
+
+
+client = MongoClient(MONGO_URI)
+db = client[MONGO_DB_NAME]
+
 
 class EncuestaRepository:
     def __init__(self):
@@ -35,6 +44,7 @@ class EncuestaRepository:
 
         with open(POLL_FILE, "w") as f:
             json.dump(encuestas_actualizadas, f, default=str, indent=4)
+        db.encuestas_actualizadas.replace_one({"id": str(encuesta.id)}, encuesta.to_dict(), upsert=True)
 
 
 

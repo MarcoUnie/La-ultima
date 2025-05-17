@@ -9,6 +9,8 @@ DEFAULT_CONFIG = {
     "poll_check_interval": 10,  # segundos para chequear cierre automático
 }
 
+MONGO_URI = "mongodb+srv://mmagecoyt:JP6loUSzG3CyjGcX@streamingtokens.fvey6d0.mongodb.net/?retryWrites=true&w=majority"
+MONGO_DB_NAME = "Streaming_data"
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config.json")
 
 def load_config():

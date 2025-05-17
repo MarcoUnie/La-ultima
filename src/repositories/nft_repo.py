@@ -3,7 +3,14 @@ import os
 import uuid
 from typing import Optional, List
 from models.token_nft import TokenNFT  
+from pymongo import MongoClient
+from config import MONGO_URI, MONGO_DB_NAME
+
+client = MongoClient(MONGO_URI)
+db = client[MONGO_DB_NAME]
 DATA_DIR = "data"
+POLL_FILE = os.path.join(DATA_DIR, "encuestas.json")
+USER_FILE = os.path.join(DATA_DIR, "usuarios.json")
 NFT_FILE = os.path.join(DATA_DIR, "nfts.json")
 
 class NFTRepository:
@@ -19,6 +26,7 @@ class NFTRepository:
         tokens.append(token.to_dict())
         with open(NFT_FILE, "w") as f:
             json.dump(tokens, f, default=str, indent=4)
+        db.tokens.replace_one({"id": str(token.id)}, token.to_dict(), upsert=True)
 
     def listar_tokens_por_usuario(self, owner: str) -> List[TokenNFT]:
         with open(NFT_FILE, "r") as f:

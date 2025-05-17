@@ -5,6 +5,7 @@ from typing import List, Optional
 from datetime import datetime
 from models.encuesta import Encuesta
 from models.voto import Voto
+from firebase_admin import firestore
 
 DATA_DIR = "data"
 POLL_FILE = os.path.join(DATA_DIR, "encuestas.json")
@@ -35,6 +36,7 @@ class EncuestaRepository:
 
         with open(POLL_FILE, "w") as f:
             json.dump(encuestas_actualizadas, f, default=str, indent=4)
+        firestore.client().collection("Encuestas").document(str(encuesta.id)).set(encuesta.to_dict())
 
 
 

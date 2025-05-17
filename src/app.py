@@ -12,7 +12,11 @@ from services.chatbot_service import ChatbotService
 from repositories.encuesta_repo import EncuestaRepository
 from repositories.usuario_repo import UsuarioRepository
 from repositories.nft_repo import NFTRepository
+import firebase_admin
+from firebase_admin import credentials
+from config import FIREBASE_CREDENTIALS
 
+firebase_admin.initialize_app(credentials.Certificate(FIREBASE_CREDENTIALS))
 def main():
     config = load_config()
 

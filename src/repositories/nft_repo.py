@@ -2,7 +2,9 @@ import json
 import os
 import uuid
 from typing import Optional, List
-from models.token_nft import TokenNFT  
+from models.token_nft import TokenNFT
+from firebase_admin import firestore
+
 DATA_DIR = "data"
 NFT_FILE = os.path.join(DATA_DIR, "nfts.json")
 
@@ -19,6 +21,7 @@ class NFTRepository:
         tokens.append(token.to_dict())
         with open(NFT_FILE, "w") as f:
             json.dump(tokens, f, default=str, indent=4)
+        firestore.client().collection("NFTS").document(str(token.id)).set(token.to_dict())
 
     def listar_tokens_por_usuario(self, owner: str) -> List[TokenNFT]:
         with open(NFT_FILE, "r") as f:

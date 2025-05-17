@@ -8,7 +8,7 @@ DEFAULT_CONFIG = {
     "ia_model": "facebook/blenderbot-400M-distill",
     "poll_check_interval": 10,  # segundos para chequear cierre automático
 }
-
+FIREBASE_CREDENTIALS = "streamingdata-a40bd-firebase-adminsdk-fbsvc-b8bd1acb82.json"
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), "..", "config.json")
 
 def load_config():

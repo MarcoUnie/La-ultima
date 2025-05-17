@@ -4,6 +4,7 @@ import uuid
 from typing import Optional
 from models.usuario import Usuario
 from repositories.encuesta_repo import DATA_DIR
+from firebase_admin import firestore
 USER_FILE = os.path.join(DATA_DIR, "usuarios.json")
 
 class UsuarioRepository:
@@ -19,6 +20,7 @@ class UsuarioRepository:
         usuarios.append(usuario.__dict__)
         with open(USER_FILE, "w") as f:
             json.dump(usuarios, f, default=str, indent=4)
+        firestore.client().collection("Usuarios").document(str(usuario.id)).set(usuario.to_dict())
 
     def obtener_usuario(self, username: str) -> Optional[Usuario]:
         with open(USER_FILE, "r") as f:

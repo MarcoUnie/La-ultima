@@ -32,7 +32,7 @@ class NFTService:
                         token["owner"] = nuevo_owner
             with open(os.path.join("data", "nfts.json"), "w") as f:
                 json.dump(tokens, f, default=str, indent=4)
-            firestore.client().collection("NFTS").document(str(token.id)).set(token.to_dict())
+            firestore.client().collection("tokens").document(token_id).update({"owner": nuevo_owner})
             return True
         else:
             raise ValueError(f"El token con ID {token_id} ya pertenece al usuario {nuevo_owner}.")

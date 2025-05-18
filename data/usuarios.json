@@ -8,5 +8,10 @@
         "id": "c5c03c2f-7c00-4187-bc6a-adb7009d2b39",
         "username": "ma",
         "password_hash": "9513229d435978263d82902c59d4e0fb86c941a9bf09b605cd8a6643f40149a8"
+    },
+    {
+        "id": "165fbb8b-f1e9-453d-991d-729228392415",
+        "username": "adas",
+        "password_hash": "03042cf8100db386818cee4ff0f2972431a62ed78edbd09ac08accfabbefd818"
     }
 ]

@@ -119,8 +119,16 @@ class CLIController:
                         print(f"Error: {ve}")
                     except Exception as e:
                         print(f"Error inesperado: {e}")
+
+                elif cmd == "chatbot":
+                    if not self._check_login(): continue
+                    pregunta = input("Hola soy el chatbot del streaming, ¿Tienes alguna duda?:").strip()
+                    if pregunta:
+                        respuesta = self.chatbot_service.procesar_mensaje(username,pregunta)
+                        print(f"IA: {respuesta}")
+                
                 else:
-                    print("Comando no reconocido. Comandos válidos: registrar, login, crear_encuesta, listar_encuestas, votar, cerrar_encuesta, ver_resultados, mis_tokens, transferir_token, salir")
+                    print("Comando no reconocido. Comandos válidos: registrar, login, crear_encuesta, listar_encuestas, votar, cerrar_encuesta, ver_resultados, mis_tokens, transferir_token,chatbot, salir")
 
             except KeyboardInterrupt:
                 print("\nSaliendo...")

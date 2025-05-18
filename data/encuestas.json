@@ -19,5 +19,19 @@
                 "timestamp": "2025-05-16T21:42:11.526509"
             }
         ]
+    },
+    {
+        "id": "8864c66a-4efe-45a8-a845-eb172c02d367",
+        "pregunta": "sdadsas",
+        "opciones": {
+            "2": 0,
+            "3": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-18T15:18:25.275288",
+        "duracion_segundos": 30,
+        "timestamp_fin": 1747574335.275288,
+        "votos": []
     }
 ]

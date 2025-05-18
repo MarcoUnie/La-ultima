@@ -4,7 +4,6 @@ from typing import Dict
 from .poll_service import PollService
 import uuid
 import re
-
 class ChatbotService:
     def __init__(self, poll_service: PollService):
         self.poll_service = poll_service
@@ -13,11 +12,12 @@ class ChatbotService:
 
     def procesar_mensaje(self, username: str, mensaje: str) -> str:
         if self._es_consulta_encuesta(mensaje):
-            return self._respuesta_encuesta(username, mensaje)
+            mensaje = input("Introduce el id o el nombre de la encuesta: ")
+            return self._respuesta_encuesta(mensaje)
         else:
             self.historial.setdefault(username, []).append(mensaje)
             respuestas = self.chatbot(mensaje)
-            respuesta = respuestas[0]['generated_text'] if respuestas else "Lo siento, no entendí eso."
+            respuesta = respuestas[0]['generated_text'].replace(mensaje, "").strip() if respuestas else "Lo siento, no entendí eso."
             self.historial[username].append(respuesta)
             return respuesta
 
@@ -41,5 +41,13 @@ class ChatbotService:
                 return f"Resultados actuales: {texto_resultados}"
             else:
                 return "No encontré esa encuesta."
-        else:
-            return "Por favor proporciona el ID de la encuesta para ver resultados."
+        encuestas = self.poll_service.listar_encuestas()
+        for encuesta in encuestas:
+            if encuesta.pregunta.lower() in mensaje.lower():
+                resultados = self.poll_service.obtener_resultados(encuesta.id)
+                if resultados:
+                    texto_resultados = ", ".join(f"{opcion}: {votos}" for opcion, votos in resultados.items())
+                    return f"Resultados para '{encuesta.pregunta}': {texto_resultados}"
+                else:
+                    return f"No encontré resultados para '{encuesta.pregunta}'."
+        return "Id o nombre de la encuesta no encontrados"

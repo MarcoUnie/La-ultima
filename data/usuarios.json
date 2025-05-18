@@ -13,5 +13,10 @@
         "id": "165fbb8b-f1e9-453d-991d-729228392415",
         "username": "adas",
         "password_hash": "03042cf8100db386818cee4ff0f2972431a62ed78edbd09ac08accfabbefd818"
+    },
+    {
+        "id": "8759e8af-72ea-47fb-a53c-8fbfcd3b1dd1",
+        "username": "fsafs",
+        "password_hash": "a0566e5c4d077424a7be39d95d1308488c81b7b49274588bf9f5b2eb13554ac4"
     }
 ]

@@ -15,7 +15,6 @@ class GradioController:
 
     def run(self):
         def votar_fn(encuesta_id, username_input, voto):
-            print(username_input)
             user_id = self.user_repo.obtener_usuario(username_input)
             try:
                 self.poll_service.votar(encuesta_id, user_id.id, voto)

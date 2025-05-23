@@ -25,7 +25,7 @@ class NFTService:
         token = self.nft_repo.obtener_token(token_id)
         if token is None:
             raise ValueError(f"El token con ID {token_id} no existe.")
-        if token.owner == actual_owner:
+        if token.owner != actual_owner:
             raise ValueError(f"El token con ID {token_id} no pertenece al usuario {actual_owner}.")
         if token.owner != nuevo_owner:
             with open(os.path.join("data", "nfts.json"), "r") as f:

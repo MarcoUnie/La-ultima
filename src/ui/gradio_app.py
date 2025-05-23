@@ -18,7 +18,7 @@ class GradioController:
             print(username_input)
             user_id = self.user_repo.obtener_usuario(username_input)
             try:
-                self.poll_service.votar(encuesta_id, user_id.id, voto, username_input)
+                self.poll_service.votar(encuesta_id, user_id.id, voto)
                 self.nft_service.crear_token(username_input, encuesta_id, voto)
                 return "Votro registrado, tienes un nuevo token"
             except ValueError as e:

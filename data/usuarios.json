@@ -18,5 +18,10 @@
         "id": "04a07bb0-efa0-42b0-82f9-d0dd8b819502",
         "username": "p",
         "password_hash": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"
+    },
+    {
+        "id": "cb5a8676-2b99-41f0-94bf-796094bef4ca",
+        "username": "saddasdas",
+        "password_hash": "621c8fdefb91eafd7dc1b3ff999ff710912288ea89e9064a21c8ddbaa5c08510"
     }
 ]

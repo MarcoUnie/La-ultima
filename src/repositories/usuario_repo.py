@@ -27,5 +27,5 @@ class UsuarioRepository:
             if data.get("username") == username:
                 user = Usuario(username=data["username"], password_hash=data["password_hash"])
                 user.id = uuid.UUID(data["id"])
-                return user
+                return [user,user.id]
         return None

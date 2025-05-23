@@ -1,82 +1,42 @@
-import gradio as gr
-from services.poll_service import PollService
 from services.user_service import UserService
+from services.poll_service import PollService
 from services.nft_service import NFTService
 from services.chatbot_service import ChatbotService
+import gradio as gr
+from repositories.usuario_repo import UsuarioRepository
 
-def launch_gradio_app(poll_service: PollService, user_service: UserService, nft_service: NFTService, chatbot_service: ChatbotService, config: dict):
-    def crear_encuesta(pregunta, opciones, duracion, tipo):
-        opciones_lista = opciones.split(",")
-        encuesta = poll_service.create_poll(pregunta, opciones_lista, int(duracion), tipo)
-        return f"Encuesta creada: {encuesta.id}"
+with gr.Blocks() as demo:
+    gr.Markdown("# Plataforma de Encuestas Streaming")
 
-    def votar(poll_id, username, opcion):
-        try:
-            poll_service.vote(poll_id, username, opcion)
-            return f"Voto registrado para {username} en encuesta {poll_id}"
-        except Exception as e:
-            return str(e)
+    with gr.Tab("Autenticación"):
+        with gr.Row():
+            username = gr.Text(label="Usuario")
+            password = gr.Text(label="Contraseña", type="password")
+        gr.Button("Registrar").click(UserService.registrar_usuario(username, password), outputs=[gr.Text()])
+        gr.Button("Login").click(UserService.autenticar_usuario(username, password), outputs=[gr.Text()])
 
-    def consultar_encuestas():
-        encuestas = poll_service.list_active_polls()
-        if not encuestas:
-            return "No hay encuestas activas."
-        return "\n".join([f"{p.id} - {p.pregunta}" for p in encuestas])
+    with gr.Tab("Encuestas"):
+        pregunta = gr.Text(label="Pregunta")
+        opciones = gr.Text(label="Opciones (coma)")
+        duracion = gr.Number(label="Duración")
+        tipo = gr.Text(label="Tipo")
+        gr.Button("Crear Encuesta").click(PollService.crear_encuesta(pregunta, opciones, duracion, tipo), outputs=[gr.Text()])
+        gr.Button("Listar Encuestas").click(PollService.listar_encuestas(), [], outputs=[gr.Text()])
+        poll_id_vote = gr.Text(label="ID Encuesta")
+        opcion_vote = gr.Text(label="Opción")
+        gr.Button("Votar").click(PollService.votar(poll_id_vote,UsuarioRepository.obtener_usuario(username)[1], opcion_vote), outputs=[gr.Text()])
+        poll_id_result = gr.Text(label="ID Encuesta Resultados")
+        gr.Button("Ver Resultados").click(PollService.obtener_resultados(poll_id_result), outputs=[gr.Text()])
 
-    def consultar_tokens(username):
-        user = user_service.get_user(username)
-        if not user:
-            return "Usuario no encontrado."
-        tokens = nft_service.list_tokens_by_user(user.id)
-        if not tokens:
-            return "No tienes tokens."
-        return "\n".join([f"Token {t.token_id} - {t.opcion} ({t.issued_at})" for t in tokens])
+    with gr.Tab("NFTs"):
+        gr.Button("Mis Tokens").click(NFTService.listar_tokens_por_usuario(username), [], outputs=[gr.Text()])
+        token_id_transfer = gr.Text(label="Token ID")
+        nuevo_owner = gr.Text(label="Nuevo Propietario")
+        gr.Button("Transferir Token").click(NFTService.transferir_token(token_id_transfer,UsuarioRepository.obtener_usuario(username)[1], nuevo_owner), outputs=[gr.Text()])
 
-    def chatear(usuario, mensaje):
-        try:
-            response = chatbot_service.respond(usuario, mensaje)
-            return response
-        except Exception as e:
-            return str(e)
+    with gr.Tab("Chatbot"):
+        pregunta_chatbot = gr.Text(label="Pregunta al Chatbot")
+        gr.Button("Enviar").click(ChatbotService.procesar_mensaje(pregunta_chatbot), outputs=[gr.Text()])
 
-    with gr.Blocks() as demo:
-        with gr.Tab("Encuestas"):
-            gr.Markdown("### Crear Encuesta")
-            pregunta = gr.Textbox(label="Pregunta")
-            opciones = gr.Textbox(label="Opciones (separadas por coma)")
-            duracion = gr.Number(label="Duración en segundos")
-            tipo = gr.Dropdown(choices=["simple", "multiple"], label="Tipo")
-            crear_btn = gr.Button("Crear Encuesta")
-            crear_output = gr.Textbox(label="Resultado")
-            crear_btn.click(crear_encuesta, inputs=[pregunta, opciones, duracion, tipo], outputs=crear_output)
-
-            gr.Markdown("### Votar en Encuesta")
-            poll_id = gr.Textbox(label="ID de Encuesta")
-            username = gr.Textbox(label="Username")
-            opcion = gr.Textbox(label="Opción")
-            votar_btn = gr.Button("Votar")
-            votar_output = gr.Textbox(label="Resultado")
-            votar_btn.click(votar, inputs=[poll_id, username, opcion], outputs=votar_output)
-
-            gr.Markdown("### Consultar Encuestas Activas")
-            consultar_btn = gr.Button("Consultar Encuestas")
-            consultar_output = gr.Textbox(label="Encuestas Activas")
-            consultar_btn.click(consultar_encuestas, outputs=consultar_output)
-
-        with gr.Tab("Tokens"):
-            gr.Markdown("### Mis Tokens")
-            username_tokens = gr.Textbox(label="Username")
-            tokens_btn = gr.Button("Consultar Tokens")
-            tokens_output = gr.Textbox(label="Tokens")
-            tokens_btn.click(consultar_tokens, inputs=[username_tokens], outputs=tokens_output)
-
-        with gr.Tab("Chatbot"):
-            gr.Markdown("### Chat con IA")
-            chat_user = gr.Textbox(label="Username")
-            chat_msg = gr.Textbox(label="Mensaje")
-            chat_btn = gr.Button("Enviar")
-            chat_output = gr.Textbox(label="Respuesta")
-            chat_btn.click(chatear, inputs=[chat_user, chat_msg], outputs=chat_output)
-
-    # Ejecutar el servidor
-    demo.launch(server_name="0.0.0.0", server_port=config["port"])
+if __name__ == "__main__":
+    demo.launch()

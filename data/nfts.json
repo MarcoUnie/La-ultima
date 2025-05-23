@@ -5,5 +5,33 @@
         "poll_id": "8cf1d550-78a2-40a7-808a-dd9f6c6481b9",
         "opcion": "2",
         "issued_at": "2025-05-16 21:42:11.528229"
+    },
+    {
+        "id": "8244429f-122d-476e-a5b1-9cc08b454247",
+        "owner": "<gradio.components.textbox.Textbox object at 0x000002BDEA931550>",
+        "poll_id": "9b89e961-ef6d-4c89-82ee-a1a8c2aa869e",
+        "opcion": "2",
+        "issued_at": "2025-05-23 19:39:48.218907"
+    },
+    {
+        "id": "8c460eba-6076-4615-8129-5de83e55f1b3",
+        "owner": "<gradio.components.textbox.Textbox object at 0x00000175E913D550>",
+        "poll_id": "e6ccf5cd-857b-4365-89bf-f5e46562aa59",
+        "opcion": "2",
+        "issued_at": "2025-05-23 19:45:21.598461"
+    },
+    {
+        "id": "3cddeec0-29b1-4b9b-917b-bf8772f631e7",
+        "owner": "dsadasads",
+        "poll_id": "29d304e2-48bb-47cd-859f-fc2ffde89abc",
+        "opcion": "2",
+        "issued_at": "2025-05-23 19:52:43.131194"
+    },
+    {
+        "id": "a2111771-217e-47b0-ade0-5bf9b5c85e33",
+        "owner": "dsadasads",
+        "poll_id": "1290d355-7a09-4a33-86cf-8b62fa080247",
+        "opcion": "4",
+        "issued_at": "2025-05-23 19:59:54.467234"
     }
 ]

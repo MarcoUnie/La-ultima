@@ -3,8 +3,8 @@ from typing import List, Optional
 from models.encuesta import Encuesta
 from models.voto import Voto
 from repositories.encuesta_repo import EncuestaRepository
+from services.nft_service import NFTService
 from datetime import datetime
-from .nft_service import NFTService 
 class PollService:
     def __init__(self, encuesta_repo: EncuestaRepository):
         self.encuesta_repo = encuesta_repo
@@ -20,8 +20,9 @@ class PollService:
             return [e for e in encuestas if e.estado == estado]
         return encuestas
 
-    def votar(self, encuesta_id: uuid.UUID, usuario_id: uuid.UUID, opcion: str) -> Voto:
+    def votar(self, encuesta_id: uuid.UUID, usuario_id: uuid.UUID, opcion: str,username: str) -> Voto:
         encuesta = self.encuesta_repo.obtener_encuesta(encuesta_id)
+        print(opcion)
         if encuesta.es_activa():
             voto = Voto(usuario_id=usuario_id, opcion=opcion, encuesta_id=encuesta_id)
             try:

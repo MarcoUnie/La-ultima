@@ -33,5 +33,167 @@
         "duracion_segundos": 30,
         "timestamp_fin": 1747574335.275288,
         "votos": []
+    },
+    {
+        "id": "34abde39-4ab7-4f00-b127-63d6bbbfa1f4",
+        "pregunta": "dsaadsdsa",
+        "opciones": {
+            "2": 1,
+            ",": 0,
+            "5": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-23T18:13:57.356242",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1748016857.356242,
+        "votos": [
+            {
+                "usuario_id": "982e70ac-8bb6-47c9-93eb-bb56f24a1812",
+                "opcion": "2",
+                "encuesta_id": "34abde39-4ab7-4f00-b127-63d6bbbfa1f4",
+                "timestamp": "2025-05-23T18:14:08.318906"
+            }
+        ]
+    },
+    {
+        "id": "54e5abbc-613d-4e4f-9c0a-6ac23140ea83",
+        "pregunta": "fsafssaffas",
+        "opciones": {
+            "2": 0,
+            "3": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-23T18:49:02.387786",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1748018962.387786,
+        "votos": []
+    },
+    {
+        "id": "730cdea4-9cb0-47ae-ab09-843b168d9e79",
+        "pregunta": "sfafsaasf",
+        "opciones": {
+            "2": 0,
+            "5": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-23T18:50:42.350987",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1748019062.350987,
+        "votos": []
+    },
+    {
+        "id": "c3f94f76-2858-499a-9196-0e35c8f2dc76",
+        "pregunta": "feefwefw",
+        "opciones": {
+            "2": 0,
+            "5": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-23T18:55:24.113899",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1748019344.113899,
+        "votos": []
+    },
+    {
+        "id": "d462e25d-6832-4098-910a-906005a2db12",
+        "pregunta": "qwrwqrwqr",
+        "opciones": {
+            "2": 0,
+            "5": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-23T19:03:23.613709",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1748019823.613709,
+        "votos": []
+    },
+    {
+        "id": "9b89e961-ef6d-4c89-82ee-a1a8c2aa869e",
+        "pregunta": "sfafasafs",
+        "opciones": {
+            "2": 1,
+            "5": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-23T19:39:44.256256",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1748022004.256256,
+        "votos": [
+            {
+                "usuario_id": "8ffff203-7eb6-4c9d-bca0-c103c061ab22",
+                "opcion": "2",
+                "encuesta_id": "9b89e961-ef6d-4c89-82ee-a1a8c2aa869e",
+                "timestamp": "2025-05-23T19:39:48.214399"
+            }
+        ]
+    },
+    {
+        "id": "e6ccf5cd-857b-4365-89bf-f5e46562aa59",
+        "pregunta": "wdqqdwqdw",
+        "opciones": {
+            "2": 1,
+            "5": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-23T19:45:14.236799",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1748022334.236799,
+        "votos": [
+            {
+                "usuario_id": "44f5a083-8121-4808-91d0-6d5c049b1e06",
+                "opcion": "2",
+                "encuesta_id": "e6ccf5cd-857b-4365-89bf-f5e46562aa59",
+                "timestamp": "2025-05-23T19:45:21.596260"
+            }
+        ]
+    },
+    {
+        "id": "29d304e2-48bb-47cd-859f-fc2ffde89abc",
+        "pregunta": "sfafsaafs",
+        "opciones": {
+            "2": 1,
+            "5": 0
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-23T19:52:38.164404",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1748022778.164404,
+        "votos": [
+            {
+                "usuario_id": "40ca72bd-cec8-4e10-925b-ccdd537df8c6",
+                "opcion": "2",
+                "encuesta_id": "29d304e2-48bb-47cd-859f-fc2ffde89abc",
+                "timestamp": "2025-05-23T19:52:43.126471"
+            }
+        ]
+    },
+    {
+        "id": "1290d355-7a09-4a33-86cf-8b62fa080247",
+        "pregunta": "gdgsdgGSD",
+        "opciones": {
+            "2": 0,
+            "4": 1
+        },
+        "tipo": "simple",
+        "estado": "activa",
+        "timestamp_inicio": "2025-05-23T19:59:48.864533",
+        "duracion_segundos": 20,
+        "timestamp_fin": 1748023208.864533,
+        "votos": [
+            {
+                "usuario_id": "3d1552d8-8f0c-4241-8604-40ae53bca389",
+                "opcion": "4",
+                "encuesta_id": "1290d355-7a09-4a33-86cf-8b62fa080247",
+                "timestamp": "2025-05-23T19:59:54.465177"
+            }
+        ]
     }
 ]

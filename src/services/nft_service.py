@@ -14,13 +14,14 @@ class NFTService:
         return token
 
     def listar_tokens_por_usuario(self, owner: str) -> list[TokenNFT]:
+        print(owner)
         return self.nft_repo.listar_tokens_por_usuario(owner)
 
     def transferir_token(self, token_id: uuid.UUID, actual_owner: str, nuevo_owner: str) -> bool:
         token = self.nft_repo.obtener_token(token_id)
         if token is None:
             raise ValueError(f"El token con ID {token_id} no existe.")
-        if token.owner == actual_owner:
+        if token.owner != actual_owner:
             raise ValueError(f"El token con ID {token_id} no pertenece al usuario {actual_owner}.")
         if token.owner != nuevo_owner:
             with open(os.path.join("data", "nfts.json"), "r") as f:

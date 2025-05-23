@@ -73,8 +73,7 @@ class CLIController:
                     poll_id = input("ID encuesta: ").strip()
                     opcion = input("Opción: ").strip()
                     try:
-                        self.poll_service.votar(poll_id, usuario_id, opcion)
-                        self.nft_service.crear_token(username, poll_id, opcion)
+                        self.poll_service.votar(poll_id, usuario_id, opcion,username)
                         print("Voto registrado.")
                     except Exception as e:
                         print(f"Error: {e}")

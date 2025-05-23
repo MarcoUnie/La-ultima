@@ -6,6 +6,7 @@ Ejecuta la aplicación desde terminal:
 python src/app.py
 Para lanzar la interfaz gráfica:
 python src/app.py --ui
+
 Factory (factory.py)
 Encapsula la lógica de creación de objetos (como encuestas o tokens NFT) dependiendo de parámetros como tipo o contexto. Facilita la extensión de nuevas variantes sin modificar código existente.
 
